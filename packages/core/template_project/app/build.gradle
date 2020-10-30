@@ -72,9 +72,9 @@ android {
             resValue "string", "webManifestUrl", '<%= webManifestUrl %>'
         <% } %>
 
-        <% if (shareTarget) { %>
+        <% if (shareTargetJson) { %>
             // The data for the app to support web share target.
-            resValue "string", "shareTarget", '<%= JSON.stringify(shareTarget) %>'
+            resValue "string", "shareTarget", '<%= shareTargetJson %>'
         <% } %>
 
         // The hostname is used when building the intent-filter, so the TWA is able to
