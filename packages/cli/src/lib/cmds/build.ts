@@ -77,7 +77,7 @@ class Build {
 
   async runValidation(): Promise<Result<PwaValidationResult, Error>> {
     try {
-      const manifestFile = path.join(process.cwd(), 'twa-manifest.json');
+      const manifestFile = this.args.manifest || path.join(process.cwd(), 'twa-manifest.json');
       const twaManifest = await TwaManifest.fromFile(manifestFile);
       const pwaValidationResult =
           await PwaValidator.validate(new URL(twaManifest.startUrl, twaManifest.webManifestUrl));
@@ -153,7 +153,8 @@ class Build {
       validationPromise = this.runValidation();
     }
 
-    const twaManifest = await TwaManifest.fromFile('./twa-manifest.json');
+    const manifestFile = this.args.manifest || './twa-manifest.json';
+    const twaManifest = await TwaManifest.fromFile(manifestFile);
     const passwords = await this.getPasswords(twaManifest.signingKey);
 
     // Builds the Android Studio Project
