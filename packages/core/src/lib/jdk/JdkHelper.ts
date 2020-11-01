@@ -48,7 +48,8 @@ export class JdkHelper {
     if (process.platform === 'win32') {
       this.joinPath = path.win32.join;
       this.pathSeparator = ';';
-      this.pathEnvironmentKey = 'Path';
+      // this.pathEnvironmentKey = 'Path';
+      this.pathEnvironmentKey = 'PATH'; //node 14 uses env.PATH instead of env.Path - normalizes it?
     } else {
       this.joinPath = path.posix.join;
       this.pathSeparator = ':';
